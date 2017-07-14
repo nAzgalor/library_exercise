@@ -16,7 +16,11 @@ table
         td = image_tag book.image.url
         td = link_to book.name, book
         td = book.author
-        td = book.status
+        td 
+          - if book.in?
+            |IN
+          - else
+            = full_name(book.user)
         td = link_to 'Edit', edit_book_path(book)
         td = link_to 'Destroy', book, data: { confirm: 'Are you sure?' }, method: :delete
 

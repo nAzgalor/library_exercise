@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: %i[show edit update destroy take_book]
 
   def index
     @books = Book.all
@@ -49,12 +49,27 @@ class BooksController < ApplicationController
     end
   end
 
-  private
-    def set_book
-      @book = Book.find(params[:id])
+  def take_book
+    if @book.in?
+      @book.update(reader_id: current_user.id)
+      redirect_to @book, notice: 'We wish you a good time!'
+    else
+      redirect_to @book, notice: 'Sorry, but this book is already being read'
     end
+  end
 
-    def book_params
-      params.require(:book).permit(:image, :name, :description, :author, :status)
-    end
+  private
+
+  def set_book
+    @book = 
+      if params[:book_id].present?
+        Book.find(params[:book_id])
+      else
+        Book.find(params[:id])
+      end
+  end
+
+  def book_params
+    params.require(:book).permit(:image, :name, :description, :author, :status)
+  end
 end

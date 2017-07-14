@@ -1,8 +1,10 @@
 p#notice = notice
 
+= link_to 'Take', book_take_book_path(@book), method: :post
+
 p
   strong Image:
-  = @book.image
+  = image_tag @book.image.url
 p
   strong Name:
   = @book.name
