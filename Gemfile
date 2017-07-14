@@ -12,6 +12,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'carrierwave', '~> 1.0'
 gem 'kaminari'
+gem 'devise'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
@@ -19,7 +20,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
-
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
