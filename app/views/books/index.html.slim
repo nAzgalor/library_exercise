@@ -1,7 +1,7 @@
 h1 Listing books
 
 = render 'books_list', books: @top_5_books
-= render 'books_list', books: @books
+= render 'books_list', books: @books if @books.present?
 
 br
 

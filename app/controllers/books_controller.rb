@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[show edit update destroy take_book]
+  before_action :set_book, only: %i[show edit update destroy take_book return_book]
+  before_action :authenticate_user!, only: %i[edit update destroy crate new take_book]
 
   def index
     @top_5_books = Book.top_5_books
@@ -53,10 +54,19 @@ class BooksController < ApplicationController
 
   def take_book
     if @book.in?
-      @book.update(reader_id: current_user.id)
+      @book.update(reader_id: current_user.id, status: 1)
       redirect_to @book, notice: 'We wish you a good time!'
     else
       redirect_to @book, notice: 'Sorry, but this book is already being read'
+    end
+  end
+
+  def return_book
+    if @book.out?
+      @book.update(reader_id: nil, status: 0)
+      redirect_to @book, notice: 'Thank you for returning the book'
+    else
+      redirect_to @book, notice: 'Sorry, but this book can not be returned'
     end
   end
 

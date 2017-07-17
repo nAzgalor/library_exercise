@@ -1,10 +1,13 @@
 p#notice = notice
 
-= link_to 'Take', book_take_book_path(@book), method: :post
+- if @book.in?
+  = link_to 'Take', book_take_book_path(@book), method: :post
+- else
+  = link_to 'Return', book_return_book_path(@book), method: :post
 
 p
   strong Image:
-  = image_tag @book.image.url
+  = image_tag @book.image.url if @book.image.present?
 p
   strong Name:
   = @book.name
