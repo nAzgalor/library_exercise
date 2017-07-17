@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170714131409) do
     t.string "name"
     t.text "description"
     t.string "author"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "reader_id"
