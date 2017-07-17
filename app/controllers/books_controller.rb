@@ -2,7 +2,9 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[show edit update destroy take_book]
 
   def index
-    @books = Book.all.page(params[:page])
+    @top_5_books = Book.top_5_books
+    @books = Book.all - @top_5_books
+    @books = Kaminari.paginate_array(@books).page(params[:page])
   end
 
   def show

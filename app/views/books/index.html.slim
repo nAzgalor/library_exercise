@@ -1,28 +1,7 @@
 h1 Listing books
 
-table
-  thead
-    tr
-      th Image
-      th Name
-      th Author
-      th Status
-      th
-      th
-
-  tbody
-    - @books.each do |book|
-      tr
-        td = image_tag book.image.url if book.image.present?
-        td = link_to book.name, book
-        td = book.author
-        td 
-          - if book.in?
-            |IN
-          - else
-            = full_name(book.user)
-        td = link_to 'Edit', edit_book_path(book)
-        td = link_to 'Destroy', book, data: { confirm: 'Are you sure?' }, method: :delete
+= render 'books_list', books: @top_5_books
+= render 'books_list', books: @books
 
 br
 
