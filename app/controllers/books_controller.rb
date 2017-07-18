@@ -9,13 +9,12 @@ class BooksController < ApplicationController
   end
 
   def show
+    @rating = Rating.new
+    @mark = RatingService.new(@book).call
   end
 
   def new
     @book = Book.new
-  end
-
-  def edit
   end
 
   def create

@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :books, foreign_key: :reader_id
+  has_many :ratings
 end
